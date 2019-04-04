@@ -6,17 +6,17 @@ import ashwin.joshi.xmlxslt.exception.DocumentObjectException;
 import ashwin.joshi.xmlxslt.model.PdfDocument;
 import ashwin.joshi.xmlxslt.service.PdfDocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.HttpClientErrorException;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PdfDocumentServiceImpl implements PdfDocumentService {
 
     @Autowired
-    PdfDocumentDAO dao;
+    private PdfDocumentDAO dao;
 
     @Override
     @Transactional(readOnly = true)
@@ -35,6 +35,7 @@ public class PdfDocumentServiceImpl implements PdfDocumentService {
     }
 
     @Override
+    @Transactional
     public PdfDocument create(PdfDocument pdfDocument) {
         Optional<PdfDocument> pdf = dao.findById(pdfDocument.getId());
         if(pdf.isPresent()){
@@ -44,12 +45,21 @@ public class PdfDocumentServiceImpl implements PdfDocumentService {
     }
 
     @Override
+    @Transactional
     public PdfDocument update(String id, PdfDocument pdfDocument) {
-        return null;
+        Optional<PdfDocument> pdf = dao.findById(id);
+        if(!pdf.isPresent()){
+            throw new DocumentObjectException("Document object with id='"+id+"\' not found.");
+        }
+        return dao.save(pdfDocument);
     }
 
     @Override
     public void delete(String id) {
-
+        Optional<PdfDocument> pdf = dao.findById(id);
+        if(!pdf.isPresent()){
+            throw new DocumentObjectException("Document object with id='"+id+"\' not found.");
+        }
+        dao.delete(pdf.get());
     }
 }
