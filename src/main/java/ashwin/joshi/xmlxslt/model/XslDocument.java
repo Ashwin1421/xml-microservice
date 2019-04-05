@@ -1,14 +1,19 @@
 package ashwin.joshi.xmlxslt.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 
-@Entity
-public class XslDocument extends BaseDocument{
+import java.io.File;
+
+public class XslDocument{
 
     @Id
     private String id;
+    private String sourceFilePath;
 
+    @Transient
+    private File sourceFile;
+    private String content;
     public String getId() {
         return id;
     }
@@ -17,10 +22,37 @@ public class XslDocument extends BaseDocument{
         this.id = id;
     }
 
+    public String getSourceFilePath() {
+        return sourceFilePath;
+    }
+
+    public void setSourceFilePath(String sourceFilePath) {
+        this.sourceFilePath = sourceFilePath;
+    }
+
+    public File getSourceFile() {
+        return sourceFile;
+    }
+
+    public void setSourceFile(File sourceFile) {
+        this.sourceFile = sourceFile;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     @Override
     public String toString() {
         return "XslDocument{" +
                 "id='" + id + '\'' +
+                ", sourceFilePath='" + sourceFilePath + '\'' +
+                ", sourceFile=" + sourceFile +
+                ", content='" + content + '\'' +
                 '}';
     }
 }
