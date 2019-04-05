@@ -21,7 +21,7 @@ public class PdfDocumentServiceImpl implements PdfDocumentService {
     @Override
     @Transactional(readOnly = true)
     public List<PdfDocument> findAll() {
-        return (List<PdfDocument>) dao.findAll();
+        return dao.findAll();
     }
 
     @Override
@@ -55,6 +55,7 @@ public class PdfDocumentServiceImpl implements PdfDocumentService {
     }
 
     @Override
+    @Transactional
     public void delete(String id) {
         Optional<PdfDocument> pdf = dao.findById(id);
         if(!pdf.isPresent()){
