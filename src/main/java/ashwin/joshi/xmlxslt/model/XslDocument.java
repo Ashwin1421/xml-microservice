@@ -9,10 +9,7 @@ public class XslDocument{
 
     @Id
     private String id;
-    private String sourceFilePath;
-
-    @Transient
-    private File sourceFile;
+    private String name;
     private String content;
     public String getId() {
         return id;
@@ -20,22 +17,6 @@ public class XslDocument{
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getSourceFilePath() {
-        return sourceFilePath;
-    }
-
-    public void setSourceFilePath(String sourceFilePath) {
-        this.sourceFilePath = sourceFilePath;
-    }
-
-    public File getSourceFile() {
-        return sourceFile;
-    }
-
-    public void setSourceFile(File sourceFile) {
-        this.sourceFile = sourceFile;
     }
 
     public String getContent() {
@@ -46,13 +27,19 @@ public class XslDocument{
         this.content = content;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
     @Override
     public String toString() {
         return "XslDocument{" +
                 "id='" + id + '\'' +
-                ", sourceFilePath='" + sourceFilePath + '\'' +
-                ", sourceFile=" + sourceFile +
                 ", content='" + content + '\'' +
                 '}';
     }
+
 }
